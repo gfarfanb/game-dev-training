@@ -1,8 +1,6 @@
 extends Area2D
 
-@export var speed: float = 100.0
-
-signal on_gem_off_screen
+@export var speed: float = 60.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,9 +9,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.y += speed * delta
-	
-	if position.y > get_viewport_rect().size.y:
-		on_gem_off_screen.emit()
-		set_process(false)
-		queue_free()
+	position.x += Input.get_axis("left", "right") * speed * delta
+
+
+func _on_gem_area_entered(area):
+	print(area)
