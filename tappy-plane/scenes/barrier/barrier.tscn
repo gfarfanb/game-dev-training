@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxb5c06n3sygy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cd05"]
+size = Vector2(496, 20)
+
+[node name="Barrier" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(238, 0)
+shape = SubResource("RectangleShape2D_1cd05")
