@@ -7,6 +7,7 @@ const POWER: float = -350.0
 
 @onready var propeller_animation = $PropellerAnimation
 @onready var player_animation = $PlayerAnimation
+@onready var sound = $Sound
 
 
 func _ready():
@@ -31,5 +32,6 @@ func fly():
 
 func die():
 	propeller_animation.stop()
+	sound.stop()
 	set_physics_process(false)
 	SignalManager.on_plane_died.emit()

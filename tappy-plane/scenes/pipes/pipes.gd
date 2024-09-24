@@ -3,8 +3,7 @@ extends Node2D
 class_name Pipes
 
 @onready var score_sound = $ScoreSound
-
-const OFF_SCREEN: float = -500.0
+@onready var visible_on_screen = $VisibleOnScreenNotifier2D
 
 
 func _ready():
@@ -13,17 +12,13 @@ func _ready():
 
 func _process(delta):
 	position.x -= delta * GameManager.SCROLL_SPEED
-	
+
 	check_off_screen()
 
 
 func check_off_screen():
-	if position.x < OFF_SCREEN:
+	if visible_on_screen.global_position.x < get_viewport_rect().position.x:
 		queue_free()
-
-
-func _on_screen_exited():
-	queue_free()
 
 
 func _on_plane_died():
@@ -38,3 +33,4 @@ func _on_pipe_body_entered(body):
 func _on_laser_body_entered(body):
 	if body is Tappy:
 		score_sound.play()
+		ScoreManager.increment_score()

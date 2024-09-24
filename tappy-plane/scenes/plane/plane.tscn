@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://eq47d7qdu2mh"]
+[gd_scene load_steps=12 format=3 uid="uid://eq47d7qdu2mh"]
 
 [ext_resource type="Texture2D" uid="uid://c2ckbauatgguj" path="res://assets/plane/planes_sheet.png" id="1_ow2ux"]
 [ext_resource type="Script" path="res://scenes/plane/plane.gd" id="1_qifxs"]
+[ext_resource type="AudioStream" uid="uid://bn0o2siy0au7l" path="res://assets/audio/engine.mp3" id="3_va82x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7aiuf"]
 atlas = ExtResource("1_ow2ux")
@@ -74,6 +75,7 @@ _data = {
 }
 
 [node name="Plane" type="CharacterBody2D" groups=["Plane"]]
+collision_layer = 8
 script = ExtResource("1_qifxs")
 
 [node name="PropellerAnimation" type="AnimatedSprite2D" parent="."]
@@ -90,3 +92,7 @@ shape = SubResource("CircleShape2D_i8rjq")
 libraries = {
 "": SubResource("AnimationLibrary_03o5x")
 }
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_va82x")
+autoplay = true

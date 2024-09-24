@@ -6,15 +6,13 @@ const PIPES = preload("res://scenes/pipes/pipes.tscn")
 @onready var spawn_l = $SpawnL
 @onready var spawn_timer = $SpawnTimer
 @onready var pipes_holder = $PipesHolder
+@onready var space_label = $SpaceLabel
 
 
 func _ready():
+	ScoreManager.set_score(0)
 	SignalManager.on_plane_died.connect(_on_plane_died)
 	spawn_pipes()
-
-
-func _process(delta):
-	pass
 
 
 func spawn_pipes():

@@ -92,7 +92,7 @@ PLAY"
 label_settings = ExtResource("4_cydfi")
 horizontal_alignment = 1
 
-[node name="HighscoreLabel" type="Label" parent="MarginContainer"]
+[node name="TitleHighscoreLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -100,7 +100,7 @@ text = "Highscore"
 label_settings = ExtResource("4_ij3yx")
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+[node name="HighscoreLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
