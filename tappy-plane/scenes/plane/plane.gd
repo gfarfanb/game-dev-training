@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
+class_name  Tappy
+
 const GRAVITY: float = 1000.0
 const POWER: float = -350.0
 
 @onready var propeller_animation = $PropellerAnimation
 @onready var player_animation = $PlayerAnimation
+
 
 func _ready():
 	pass
@@ -29,3 +32,4 @@ func fly():
 func die():
 	propeller_animation.stop()
 	set_physics_process(false)
+	SignalManager.on_plane_died.emit()
