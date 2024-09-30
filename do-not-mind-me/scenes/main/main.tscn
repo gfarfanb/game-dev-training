@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8xt21vm3fbcx"]
+
+[ext_resource type="FontFile" uid="uid://jsiqhbx2bull" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_1ipcm"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_u52sa"]
+[ext_resource type="Texture2D" uid="uid://4f70locbgxub" path="res://assets/images/pill1.png" id="2_cblxj"]
+[ext_resource type="Texture2D" uid="uid://cbyktnk5b84mx" path="res://assets/images/pill2.png" id="3_xh6f7"]
+[ext_resource type="Texture2D" uid="uid://dleb8h2qd4ok" path="res://assets/images/soldier1_gun.png" id="4_5t5wa"]
+[ext_resource type="Texture2D" uid="uid://dln1dk101krx5" path="res://assets/images/survivor1_gun.png" id="5_io1q4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_thg5l"]
+font = ExtResource("1_1ipcm")
+font_size = 64
+font_color = Color(0.706751, 0.539075, 0.254696, 1)
+outline_size = 6
+outline_color = Color(0.184314, 0.0862745, 1, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u52sa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.170247, 0.385317, 0.682637, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PRESS SPACE TO PLAY"
+label_settings = SubResource("LabelSettings_thg5l")
+
+[node name="Pill1" type="Sprite2D" parent="."]
+position = Vector2(194, 102)
+rotation = -1.62034
+texture = ExtResource("2_cblxj")
+
+[node name="Pill2" type="Sprite2D" parent="."]
+position = Vector2(942, 144)
+texture = ExtResource("3_xh6f7")
+
+[node name="Soldier1Gun" type="Sprite2D" parent="."]
+position = Vector2(206, 456)
+rotation = -2.11945
+texture = ExtResource("4_5t5wa")
+
+[node name="Survivor1Gun" type="Sprite2D" parent="."]
+position = Vector2(879, 466)
+rotation = 1.0776
+texture = ExtResource("5_io1q4")

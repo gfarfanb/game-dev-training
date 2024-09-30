@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh0fqgrdf2pvb"]
+
+[ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_5euho"]
+[ext_resource type="Texture2D" uid="uid://dleb8h2qd4ok" path="res://assets/images/soldier1_gun.png" id="2_oe63b"]
+[ext_resource type="Texture2D" uid="uid://b6skfb6x7v4tk" path="res://assets/images/running_1.png" id="3_jpogs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_333ve"]
+radius = 12.0
+height = 44.0
+
+[sub_resource type="Animation" id="Animation_rp243"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2pcp3"]
+resource_name = "alert"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.516553, 0, 0.09436, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oqcni"]
+_data = {
+"RESET": SubResource("Animation_rp243"),
+"alert": SubResource("Animation_2pcp3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wmtw"]
+radius = 17.1172
+
+[node name="NPC" type="CharacterBody2D" groups=["npc"]]
+collision_layer = 0
+script = ExtResource("1_5euho")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(11, 0)
+texture = ExtResource("2_oe63b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_333ve")
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+offset_left = -21.0
+offset_top = -101.0
+offset_right = 21.0
+offset_bottom = -26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Debug 1
+Debug 2
+Debug 3
+Debug 4"
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.313395, 0.000882237, 0.760773, 1)
+debug_path_custom_line_width = 1.0
+
+[node name="PlayerDetect" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="PlayerDetect"]
+rotation = -1.5708
+target_position = Vector2(0, 400)
+collision_mask = 5
+
+[node name="Warning" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, -1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_jpogs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oqcni")
+}
+
+[node name="GaspSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_5wmtw")
+
+[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
